@@ -1,0 +1,57 @@
+.header{
+    background: linear-gradient(black,indigo);
+    display:flex;
+    justify-content: space-between;
+    height: 110px;
+    padding:20px;
+    position:fixed;
+    width:100%;
+    z-index:100;
+}
+
+.header .containerLogo{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 28%;
+    min-width: 240px;
+}
+
+.header .containerLogo h3{
+    color: white;
+    font-size: 30px;
+}
+
+.header img{
+    border-radius: 50%;
+    width: 40%;
+}
+
+.header .menu{
+    width:40%;
+}
+
+.header .menu ul {
+    display:flex;
+    align-items: center;
+    height:100%;
+    justify-content:space-around;
+    list-style:none;
+    padding:0;
+}
+
+.header .menu ul li{
+    color:white;
+    font-size:24px;
+}
+
+.header .menu ul li img{
+    border-radius:40px;
+    width:45px;
+}
+
+.menu ul a{
+    color: white;
+    font-size:24px;
+    text-decoration: none;
+}
