@@ -4,8 +4,9 @@
 
 .main{
 
-    min-height: calc(100vh - 70px - 58px);
-    padding-bottom: 58px;
+    min-height: calc(100vh - 110px - 58px);
+    padding: 40px;
+    padding-bottom: 98px;
     position:relative;
-    top:70px; 
+    top:110px; 
 }

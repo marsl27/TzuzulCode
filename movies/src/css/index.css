@@ -24,6 +24,7 @@
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3,1fr);
+  
 }
 .movie__image{
   width: 100%;

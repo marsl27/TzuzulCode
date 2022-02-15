@@ -2,37 +2,33 @@ import React, { useContext, useRef } from 'react';
 import { useParams ,Navigate} from 'react-router-dom';
 import Movie from '../components/Movie';
 import { moviesContext } from '../context/MoviesProvider';
+import { reviewsContext } from '../context/ReviewsProvider';
 //import NotFound from './NotFound';
 
 export default function Details() {
   const {id} = useParams()
-  const {movies,reviews,setReviews,setMovies} = useContext(moviesContext)
+  const {movies,setMovies} = useContext(moviesContext)
+  const {reviews,addReview,setReviews} = useContext(reviewsContext)
   const comentario = useRef()
   const rating = useRef()
   //const navigate = useNavigate()
 
   const movie = movies.filter(movie=>movie.id===id)[0]
-
-
-
-  // if(!movie){
-  //   return <NotFound/>
-  // }
+  console.log(movie);
   if(!movie){
     return <Navigate to="/notfound"/>
   }
 
-  const addReview = ()=>{
-    let valueComment = comentario.current.value
+  const add = ()=>{
+    let comment = comentario.current.value
     let stars = rating.current.value
-    movie.stars= movie.stars + parseInt(stars)
-    movie.numberOfReviews++
-    setMovies([...movies])
-    setReviews([...reviews,{id:reviews.length,idMovie:movie.id,comment:valueComment}])
+    addReview(movie,stars,comment)
   }
 
+  console.log(reviews.reviews);
+  
   return <div>
-      <p>Details {id}</p>
+      
       <Movie movie={movie}></Movie>
       <div>
         <input ref={comentario} type="text"></input>
@@ -43,12 +39,10 @@ export default function Details() {
           <option value={4}>4</option>
           <option value={5}>5</option>
         </select>
-        <button onClick={addReview}>Agregar review</button>
+        <button onClick={add}>Agregar review</button>
       </div>
 
-      {/* && (and): Operador de cortocircuito */}
-      {/* || (or)*/}
-      {reviews.map(review=>review.idMovie===id&&<p>{review.comment}</p>)}
+      {reviews.length > 0 ? reviews.reviews.map(review=>review.idMovie===id&&<p>{review.comment}</p>) : null}
 
       {/* Mostrar comentarios */}
       

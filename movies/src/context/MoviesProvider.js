@@ -1,4 +1,6 @@
-import React,{createContext, useState} from 'react';
+import React,{createContext, useState, useReducer, useEffect} from 'react';
+import MoviesReducer, { moviesInitialState } from '../reducers/moviesReducer.js';
+import axios from 'axios';
 
 export const moviesContext = createContext()
 // Mockup
@@ -33,10 +35,23 @@ const mockup = [{
 
 export default function MoviesProvider({children}) {
 
-    const [movies,setMovies] = useState(mockup)
-    
+    //const [movies,setMovies] = useState(mockup)
+    const [movies, setMovies] = useReducer(MoviesReducer, moviesInitialState)
 
-  return <moviesContext.Provider value={{movies,setMovies}}>
+    useEffect(()=>{
+        axios.get("https://backendtzuzulcode.wl.r.appspot.com/movies")
+        .then((response)=>{
+            console.log(response.data);
+            setMovies({type:"addMovies", movies:response.data})
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    },[])
+
+    console.log(movies);
+
+  return <moviesContext.Provider value={{movies:mockup/*movies.movies */,setMovies}}>
       {children}
   </moviesContext.Provider>
 }
